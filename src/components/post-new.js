@@ -31,7 +31,7 @@ class PostNew extends React.Component {
             <input
             type = "radio"
             {...field.input} />
-            <label>{field.placeholder}</label>
+            <label>{field.label}</label>
             { field.meta.touched ? 
              <div className = "text-help">{ field.meta.error}</div>:''}
             </div>
@@ -73,20 +73,20 @@ class PostNew extends React.Component {
              <label>
             <Field
               name="sex"
-              component="input"
+              label = "Male"
+              component= { this.renderRadioField}
               type="radio"
               value="male"
-            />{' '}
-              Male
+            />
           </label>
           <label>
             <Field
               name="sex"
-              component="input"
+              label = "Female"
+              component= { this.renderRadioField}
               type="radio"
               value="female"
-            />{' '}
-             Female
+            />
           </label>
         </div>
       </div>
