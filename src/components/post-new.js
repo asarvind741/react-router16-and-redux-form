@@ -21,7 +21,25 @@ class PostNew extends React.Component {
         )
     }
 
+    onChangeRadio(event){
+        console.log("event", event)
+    }
+
+    renderRadioField(field){
+        return (
+            <div className = {`form-group ${field.meta.touched && field.meta.error ? 'has-danger': ''}`}>
+            <input
+            type = "radio"
+            {...field.input} />
+            <label>{field.placeholder}</label>
+            { field.meta.touched ? 
+             <div className = "text-help">{ field.meta.error}</div>:''}
+            </div>
+        )
+    }
+
     onSubmit(values){
+        console.log("values", values)
         
         this.props.createPost(values, () => {
             this.props.history.push("/")
@@ -48,6 +66,31 @@ class PostNew extends React.Component {
             label = "Content:"
             name = "content" 
             component = {this.renderField}/>
+
+            <div>
+             <label>Sex</label>
+               <div>
+             <label>
+            <Field
+              name="sex"
+              component="input"
+              type="radio"
+              value="male"
+            />{' '}
+              Male
+          </label>
+          <label>
+            <Field
+              name="sex"
+              component="input"
+              type="radio"
+              value="female"
+            />{' '}
+             Female
+          </label>
+        </div>
+      </div>
+
             <button type="submit" className = "btn btn-primary">Submit </button>
             <Link to = "/" className = "btn btn-danger">Cancel</Link>
 
@@ -57,7 +100,7 @@ class PostNew extends React.Component {
 }
 
 function validate(values){
-    console.log("values")
+    console.log("sds", values)
 const errors = {};
 
 if(!values.title || values.title.length<4){
@@ -70,6 +113,10 @@ if(!values.categories){
 
 if(!values.content){
     errors.content = "Enter a content!"
+}
+
+if(!values.sex){
+    errors.sex = "Please accept terms & conditions!"
 }
 
 return errors;
